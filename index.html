@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Millaura Bakers – Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brown: #3b1f0a;
+      --caramel: #c47c2b;
+      --gold: #e09f3e;
+      --cream: #fdf8f0;
+      --warm: #f5ede0;
+      --muted: #8a6040;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: 'DM Sans', sans-serif;
+      background: #1a0d04;
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── Floating bakery background ── */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bg-canvas svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .float-item {
+      animation: floatDrift linear infinite;
+      transform-origin: center;
+    }
+
+    @keyframes floatDrift {
+      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+      5%   { opacity: 0.18; }
+      95%  { opacity: 0.12; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* dark overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(26,13,4,0.55) 0%, rgba(26,13,4,0.85) 100%);
+      z-index: 1;
+    }
+
+    /* ── Main wrapper ── */
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      margin-bottom: 28px;
+      animation: fadeUp 1s ease both;
+    }
+
+    /* ── Brand name ── */
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 9vw, 96px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -2px;
+      color: var(--cream);
+      animation: fadeUp 1s 0.1s ease both;
+    }
+    .brand span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .tagline {
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      animation: fadeUp 1s 0.2s ease both;
+    }
+
+    /* ── Gold rule ── */
+    .rule {
+      margin: 36px auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: min(400px, 90%);
+      animation: fadeUp 1s 0.3s ease both;
+    }
+    .rule-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(224,159,62,0.6), transparent);
+    }
+    .rule-diamond {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ── Headline ── */
+    .headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 3.5vw, 32px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.5;
+      max-width: 520px;
+      animation: fadeUp 1s 0.35s ease both;
+    }
+
+    .sub {
+      margin-top: 14px;
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(253,248,240,0.65);
+      max-width: 420px;
+      line-height: 1.8;
+      animation: fadeUp 1s 0.45s ease both;
+    }
+
+    /* ── Product pills ── */
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 32px;
+      animation: fadeUp 1s 0.5s ease both;
+    }
+    .pill {
+      border: 1px solid rgba(224,159,62,0.4);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      backdrop-filter: blur(6px);
+      background: rgba(196,124,43,0.08);
+      transition: all 0.25s ease;
+    }
+    .pill:hover {
+      background: rgba(196,124,43,0.25);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* ── Status badge ── */
+    .badge {
+      margin-top: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(224,159,62,0.3);
+      border-radius: 100px;
+      padding: 10px 24px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(253,248,240,0.8);
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.04);
+      animation: fadeUp 1s 0.55s ease both;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.4; transform:scale(0.6); }
+    }
+
+    /* ── Notify form ── */
+    .notify {
+      margin-top: 36px;
+      animation: fadeUp 1s 0.6s ease both;
+    }
+    .notify-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(253,248,240,0.45);
+      margin-bottom: 14px;
+    }
+    .email-row {
+      display: flex;
+      border-radius: 100px;
+      overflow: hidden;
+      border: 1px solid rgba(224,159,62,0.3);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(8px);
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .email-row input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 13px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      background: transparent;
+      color: var(--cream);
+    }
+    .email-row input::placeholder { color: rgba(253,248,240,0.3); }
+    .email-row button {
+      border: none;
+      background: var(--caramel);
+      color: white;
+      padding: 13px 22px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .email-row button:hover { background: var(--brown); }
+    .success {
+      display: none;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    /* ── Order cards ── */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 44px;
+      max-width: 720px;
+      animation: fadeUp 1s 0.7s ease both;
+    }
+    .card {
+      flex: 1;
+      min-width: 200px;
+      max-width: 220px;
+      border: 1px solid rgba(224,159,62,0.2);
+      border-radius: 16px;
+      padding: 22px 20px;
+      text-align: left;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+    .card:hover {
+      border-color: rgba(224,159,62,0.5);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-3px);
+    }
+    .card-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .card p {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(253,248,240,0.5);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .card a {
+      font-size: 12px;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(224,159,62,0.3);
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+    .card a:hover { border-color: var(--gold); }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 52px;
+      animation: fadeUp 1s 0.8s ease both;
+    }
+    footer p {
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: rgba(253,248,240,0.3);
+      line-height: 2;
+    }
+    footer a { color: rgba(253,248,240,0.3); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating bakery background -->
+<div class="bg-canvas">
+  <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Cookie 1 -->
+      <g id="cookie">
+        <circle r="28" fill="#c47c2b" opacity="0.9"/>
+        <circle r="28" fill="none" stroke="#e09f3e" stroke-width="1.5" opacity="0.4"/>
+        <circle cx="-8" cy="-8" r="4" fill="#5c2e00" opacity="0.7"/>
+        <circle cx="10" cy="-5" r="3" fill="#5c2e00" opacity="0.7"/>
+        <circle cx="-2" cy="10" r="3.5" fill="#5c2e00" opacity="0.7"/>
+        <circle cx="12" cy="10" r="2.5" fill="#5c2e00" opacity="0.7"/>
+        <circle cx="-14" cy="5" r="2" fill="#5c2e00" opacity="0.7"/>
+      </g>
+      <!-- Croissant -->
+      <g id="croissant">
+        <path d="M-30,0 Q-15,-25 0,-10 Q15,-25 30,0 Q15,20 0,8 Q-15,20 -30,0Z" fill="#d4a04a" opacity="0.85"/>
+        <path d="M-20,0 Q-10,-15 0,-6 Q10,-15 20,0" fill="none" stroke="#e8bf7a" stroke-width="1.5" opacity="0.5"/>
+      </g>
+      <!-- Bread loaf -->
+      <g id="bread">
+        <ellipse rx="32" ry="20" fill="#b5702a" opacity="0.8"/>
+        <ellipse ry="20" rx="32" fill="none" stroke="#d4903a" stroke-width="1" opacity="0.4"/>
+        <path d="M-20,-5 Q0,-18 20,-5" fill="none" stroke="#e8bf7a" stroke-width="1.5" opacity="0.35"/>
+        <path d="M-8,-2 Q0,-10 8,-2" fill="none" stroke="#e8bf7a" stroke-width="1" opacity="0.3"/>
+      </g>
+      <!-- Star/sparkle -->
+      <g id="star">
+        <path d="M0,-12 L2,-2 L12,0 L2,2 L0,12 L-2,2 L-12,0 L-2,-2Z" fill="#e09f3e" opacity="0.7"/>
+      </g>
+      <!-- Heart cookie -->
+      <g id="heart">
+        <path d="M0,10 C-20,-5 -25,-20 -12,-22 C-5,-23 0,-15 0,-15 C0,-15 5,-23 12,-22 C25,-20 20,-5 0,10Z" fill="#c47c2b" opacity="0.75"/>
+      </g>
+    </defs>
+
+    <!-- Row 1 -->
+    <use href="#cookie"    x="80"  y="0" class="float-item" style="animation-duration:18s; animation-delay:0s"/>
+    <use href="#croissant" x="220" y="0" class="float-item" style="animation-duration:22s; animation-delay:3s"/>
+    <use href="#bread"     x="380" y="0" class="float-item" style="animation-duration:19s; animation-delay:6s"/>
+    <use href="#star"      x="520" y="0" class="float-item" style="animation-duration:14s; animation-delay:1s"/>
+    <use href="#cookie"    x="660" y="0" class="float-item" style="animation-duration:21s; animation-delay:8s"/>
+    <use href="#heart"     x="800" y="0" class="float-item" style="animation-duration:17s; animation-delay:4s"/>
+    <use href="#croissant" x="950" y="0" class="float-item" style="animation-duration:23s; animation-delay:11s"/>
+    <use href="#star"      x="1100"y="0" class="float-item" style="animation-duration:15s; animation-delay:2s"/>
+
+    <!-- Row 2 offset -->
+    <use href="#bread"     x="140" y="0" class="float-item" style="animation-duration:20s; animation-delay:9s"/>
+    <use href="#star"      x="300" y="0" class="float-item" style="animation-duration:13s; animation-delay:5s"/>
+    <use href="#heart"     x="450" y="0" class="float-item" style="animation-duration:25s; animation-delay:14s"/>
+    <use href="#cookie"    x="600" y="0" class="float-item" style="animation-duration:16s; animation-delay:7s"/>
+    <use href="#croissant" x="750" y="0" class="float-item" style="animation-duration:21s; animation-delay:12s"/>
+    <use href="#bread"     x="900" y="0" class="float-item" style="animation-duration:18s; animation-delay:0s"/>
+    <use href="#star"      x="1050"y="0" class="float-item" style="animation-duration:12s; animation-delay:10s"/>
+
+    <!-- Row 3 -->
+    <use href="#cookie"    x="50"  y="0" class="float-item" style="animation-duration:24s; animation-delay:16s"/>
+    <use href="#heart"     x="180" y="0" class="float-item" style="animation-duration:19s; animation-delay:3s"/>
+    <use href="#star"      x="340" y="0" class="float-item" style="animation-duration:15s; animation-delay:13s"/>
+    <use href="#croissant" x="500" y="0" class="float-item" style="animation-duration:22s; animation-delay:7s"/>
+    <use href="#bread"     x="680" y="0" class="float-item" style="animation-duration:17s; animation-delay:5s"/>
+    <use href="#cookie"    x="860" y="0" class="float-item" style="animation-duration:20s; animation-delay:18s"/>
+    <use href="#heart"     x="1020"y="0" class="float-item" style="animation-duration:26s; animation-delay:9s"/>
+    <use href="#star"      x="1150"y="0" class="float-item" style="animation-duration:14s; animation-delay:15s"/>
+  </svg>
+</div>
+
+<div class="overlay"></div>
+
+<div class="wrapper">
+
+  <!-- Logo SVG -->
+  <div class="logo-wrap">
+    <svg width="110" height="110" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer ring -->
+      <circle cx="55" cy="55" r="52" fill="none" stroke="#e09f3e" stroke-width="1" opacity="0.5"/>
+      <circle cx="55" cy="55" r="48" fill="rgba(196,124,43,0.12)"/>
+      <!-- Cookie shape base -->
+      <circle cx="55" cy="55" r="32" fill="#c47c2b"/>
+      <circle cx="55" cy="55" r="32" fill="none" stroke="#e09f3e" stroke-width="1.5" opacity="0.6"/>
+      <!-- Chocolate chips -->
+      <circle cx="47" cy="48" r="4" fill="#3b1f0a"/>
+      <circle cx="62" cy="47" r="3.5" fill="#3b1f0a"/>
+      <circle cx="52" cy="61" r="4" fill="#3b1f0a"/>
+      <circle cx="65" cy="60" r="3" fill="#3b1f0a"/>
+      <circle cx="43" cy="62" r="3" fill="#3b1f0a"/>
+      <!-- M letter in center -->
+      <text x="55" y="59" text-anchor="middle" font-family="Playfair Display, serif" font-size="18" font-weight="700" fill="#fdf8f0" opacity="0.95">M</text>
+      <!-- Top text arc (static) -->
+      <path id="topArc" d="M 20,55 A 35,35 0 0,1 90,55" fill="none"/>
+      <text font-family="DM Sans, sans-serif" font-size="7" font-weight="500" fill="#e09f3e" letter-spacing="3">
+        <textPath href="#topArc" startOffset="8%">MILLAURA</textPath>
+      </text>
+      <!-- Bottom text arc -->
+      <path id="botArc" d="M 20,55 A 35,35 0 0,0 90,55" fill="none"/>
+      <text font-family="DM Sans, sans-serif" font-size="7" font-weight="500" fill="#e09f3e" letter-spacing="3">
+        <textPath href="#botArc" startOffset="12%">BAKERS</textPath>
+      </text>
+      <!-- Small diamonds -->
+      <rect x="53.5" y="8.5" width="3" height="3" transform="rotate(45 55 10)" fill="#e09f3e" opacity="0.8"/>
+      <rect x="53.5" y="97.5" width="3" height="3" transform="rotate(45 55 99)" fill="#e09f3e" opacity="0.8"/>
+    </svg>
+  </div>
+
+  <h1 class="brand">Millaura<br>Bakers</h1>
+  <p class="tagline">Handcrafted with love · Est. 2026</p>
+
+  <div class="rule">
+    <div class="rule-line"></div>
+    <div class="rule-diamond"></div>
+    <div class="rule-line"></div>
+  </div>
+
+  <p class="headline">Something wonderfully delicious<br>is being baked for you.</p>
+  <p class="sub">We're putting the finishing touches on our website. Our handcrafted cookies are almost ready to be shared with the world.</p>
+
+  <div class="products">
+    <span class="pill">Classic Cookies</span>
+    <span class="pill">Healthy Cookies</span>
+    <span class="pill">Handcrafted Cookies</span>
+    <span class="pill">Millets Based Cookie</span>
+  </div>
+
+  <div class="badge">
+    <span class="dot"></span>
+    Website Under Construction
+  </div>
+
+  <div class="notify">
+    <p class="notify-label">Get notified when we launch</p>
+    <div class="email-row">
+      <input type="email" id="notifyEmail" placeholder="your@email.com"/>
+      <button onclick="handleNotify()">Notify Me</button>
+    </div>
+    <p class="success" id="successMsg">✓ Thanks! We'll be in touch soon.</p>
+  </div>
+
+  <div class="cards" style="justify-content:center;">
+    <div class="card" style="max-width:260px;">
+      <span class="card-icon">💬</span>
+      <h3>General Support</h3>
+      <p>Have a question? We'd love to hear from you anytime.</p>
+      <a href="mailto:support@millaurabakers.com">support@millaurabakers.com</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      <a href="mailto:support@millaurabakers.com">support@millaurabakers.com</a>
+    </p>
+    <p style="margin-top:8px;">
+      Millaura Bakers is a registered trademark. &nbsp;·&nbsp; &copy; 2026 Millaura Bakers. All rights reserved.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  function handleNotify() {
+    const input = document.getElementById('notifyEmail');
+    const msg = document.getElementById('successMsg');
+    const email = input.value.trim();
+    if (!email || !email.includes('@')) {
+      input.style.outline = '1px solid #e09f3e';
+      setTimeout(() => input.style.outline = 'none', 1500);
+      return;
+    }
+    window.location.href = 'mailto:support@millaurabakers.com?subject=Launch Notification Request&body=Please notify me when Millaura Bakers launches! My email: ' + encodeURIComponent(email);
+    msg.style.display = 'block';
+    input.value = '';
+  }
+</script>
+</body>
+</html>

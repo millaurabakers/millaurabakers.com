@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Millaura Bakers",
+  "description": "Pre-launch coming soon showcase for Millaura Bakers\u0027 handcrafted, organic millet cookies, homemade with passion in India.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
